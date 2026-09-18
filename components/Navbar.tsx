@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Button from "@/components/Button";
+import Logo from "@/components/Logo";
 
 const NAV_LINKS = [
   { href: "/about", label: "About" },
@@ -21,10 +22,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/95 backdrop-blur-sm">
       <div className="mx-auto flex h-20 max-w-content items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2.5" onClick={() => setIsOpen(false)}>
-          <span className="flex items-center gap-1" aria-hidden="true">
-            <span className="h-6 w-1.5 -skew-x-12 rounded-full bg-brand-blue" />
-            <span className="h-7 w-2 -skew-x-12 rounded-full bg-brand-blue" />
-          </span>
+          <Logo className="h-7 w-[23px] text-brand-blue" />
           <span className="text-xl font-bold tracking-tight text-slate-950">velora</span>
         </Link>
 

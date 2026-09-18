@@ -12,8 +12,8 @@ const config: Config = {
       // (Industries & Partnerships, Let's talk / Contact, News & Updates).
       colors: {
         brand: {
-          blue: "#2563EB",
-          dark: "#1D4ED8",
+          blue: "#366FE5",
+          dark: "#2E5EC3",
           navy: "#0B1E48",
         },
       },
