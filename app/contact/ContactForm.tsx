@@ -2,9 +2,6 @@
 
 import { useState } from "react";
 
-const selectChevron =
-  "bg-[url('data:image/svg+xml,%3csvg_xmlns=%27http://www.w3.org/2000/svg%27_fill=%27none%27_viewBox=%270_0_20_20%27%3e%3cpath_stroke=%27%2364748b%27_stroke-linecap=%27round%27_stroke-linejoin=%27round%27_stroke-width=%271.5%27_d=%27M6_8l4_4_4-4%27/%3e%3c/svg%3e')] bg-no-repeat bg-[right_0.75rem_center] bg-[length:1.25em_1.25em] pr-10";
-
 const inputStyles =
   "h-12 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm text-slate-900 outline-none transition focus:border-brand-blue focus:ring-1 focus:ring-brand-blue";
 
@@ -59,7 +56,7 @@ export default function ContactForm() {
               name="service-needed"
               required
               defaultValue=""
-              className={`${inputStyles} appearance-none text-slate-700 ${selectChevron}`}
+              className={`${inputStyles} form-select appearance-none text-slate-700`}
             >
               <option value="" disabled hidden />
               <option value="artificial-intelligence">Artificial Intelligence</option>
@@ -81,7 +78,7 @@ export default function ContactForm() {
               name="estimated-budget"
               required
               defaultValue=""
-              className={`${inputStyles} appearance-none text-slate-700 ${selectChevron}`}
+              className={`${inputStyles} form-select appearance-none text-slate-700`}
             >
               <option value="" disabled hidden />
               <option value="10k-25k">$10,000 – $25,000</option>
