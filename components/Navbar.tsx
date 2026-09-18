@@ -67,6 +67,7 @@ export default function Navbar() {
             stroke="currentColor"
             strokeWidth={1.75}
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             {isOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />

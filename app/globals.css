@@ -6,6 +6,17 @@ body {
   font-weight: 400;
 }
 
+@layer base {
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid theme("colors.brand.blue");
+    outline-offset: 2px;
+  }
+}
+
 @layer components {
   /* Custom select chevron for the contact form (replaces the native arrow) */
   .form-select {

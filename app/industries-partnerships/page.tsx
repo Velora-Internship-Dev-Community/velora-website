@@ -143,6 +143,7 @@ const PARTNERS: Partner[] = [
             stroke="currentColor"
             strokeWidth={2}
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z" />
             <circle cx="12" cy="9" r="3" />
@@ -166,6 +167,7 @@ const PARTNERS: Partner[] = [
           stroke="currentColor"
           strokeWidth={1.75}
           viewBox="0 0 24 24"
+          aria-hidden="true"
         >
           <path d="M12 2v20M12 4c-3 2-4 5-4 8 0 4 4 8 4 8s4-4 4-8c0-3-1-6-4-8z" />
           <path d="M8 8l8 8M16 8l-8 8" />
