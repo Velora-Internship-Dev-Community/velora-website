@@ -8,19 +8,20 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // TODO: replace all placeholder values with the confirmed design tokens from the approved Figma file before building real pages.
+      // Design tokens sourced from the approved Velora Stitch HTML designs
+      // (Industries & Partnerships, Let's talk / Contact, News & Updates).
       colors: {
-        primary: { DEFAULT: "#000000" }, // PLACEHOLDER — replace with confirmed brand color
-        paper: "#FFFFFF",
-        ink: "#111111", // PLACEHOLDER
+        brand: {
+          blue: "#2563EB",
+          dark: "#1D4ED8",
+          navy: "#0B1E48",
+        },
       },
       fontFamily: {
-        display: ["sans-serif"], // PLACEHOLDER — replace once brand font is confirmed
-        body: ["sans-serif"],
+        sans: ["var(--font-inter)", "sans-serif"],
       },
-      borderRadius: {},
       maxWidth: {
-        content: "1180px", // reasonable default content width, adjust as needed
+        content: "1280px",
       },
     },
   },
