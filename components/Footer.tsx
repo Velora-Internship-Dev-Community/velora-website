@@ -24,7 +24,9 @@ export default function Footer() {
       <div className="mx-auto max-w-content">
         <div className="grid grid-cols-1 gap-10 pb-16 md:grid-cols-12">
           <div className="md:col-span-6">
-            <h2 className="mb-2 text-2xl font-bold tracking-tight text-white md:text-3xl">Velora</h2>
+            <h2 className="mb-2 text-2xl font-bold tracking-tight text-white md:text-3xl">
+              Velora
+            </h2>
             <p className="text-sm font-normal text-blue-100">The premium African tech company</p>
           </div>
 
