@@ -26,7 +26,7 @@ interface SubmitButtonProps extends BaseProps {
 type ButtonProps = LinkButtonProps | SubmitButtonProps;
 
 export default function Button({ children, href, type, size = "sm", className = "" }: ButtonProps) {
-  const classes = `inline-flex items-center justify-center gap-1.5 rounded-lg font-semibold text-white shadow-sm transition-all hover:bg-brand-dark bg-brand-blue ${SIZE_STYLES[size]} ${className}`;
+  const classes = `inline-flex items-center justify-center gap-1.5 rounded-lg font-heading font-semibold text-white shadow-sm transition-all hover:bg-brand-dark bg-brand-blue ${SIZE_STYLES[size]} ${className}`;
 
   if (href) {
     return (

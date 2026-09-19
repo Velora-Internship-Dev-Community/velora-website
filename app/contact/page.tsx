@@ -22,7 +22,7 @@ export default function ContactPage() {
             <span className="mb-5 text-xs font-bold uppercase tracking-wider text-slate-700">
               Talk to the sales
             </span>
-            <h1 className="mb-8 text-4xl font-extrabold leading-[1.18] tracking-tight text-slate-900 sm:text-5xl">
+            <h1 className="mb-8 font-heading text-4xl font-extrabold leading-[1.18] tracking-tight text-slate-900 sm:text-5xl">
               Every great project starts with one{" "}
               <span className="inline-block whitespace-nowrap rounded-lg bg-brand-blue px-3 py-0.5 text-white">
                 conversation.

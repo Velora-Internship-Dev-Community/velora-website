@@ -23,7 +23,9 @@ export default function Navbar() {
       <div className="mx-auto flex h-20 max-w-content items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2.5" onClick={() => setIsOpen(false)}>
           <Logo className="h-7 w-[23px] text-brand-blue" />
-          <span className="text-xl font-bold tracking-tight text-slate-950">velora</span>
+          <span className="font-heading text-xl font-bold tracking-tight text-slate-950">
+            velora
+          </span>
         </Link>
 
         <nav

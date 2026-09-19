@@ -19,6 +19,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
+        heading: ["var(--font-bricolage)", "sans-serif"],
       },
       maxWidth: {
         content: "1280px",

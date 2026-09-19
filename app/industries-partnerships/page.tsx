@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import Image from "next/image";
 import Button from "@/components/Button";
 
 export const metadata: Metadata = {
@@ -74,12 +75,14 @@ const PARTNERS: Partner[] = [
     name: "MINICT",
     description: "Engagement within Rwanda's national ICT and Innovation ecosystem.",
     mark: (
-      <div className="flex items-center space-x-2">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-yellow-500/40 p-1">
-          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-yellow-500 via-green-600 to-blue-500 text-[8px] font-bold text-white">
-            RW
-          </div>
-        </div>
+      <div className="flex items-center gap-3">
+        <Image
+          src="/images/partners/minict.svg"
+          alt="Ministry of ICT and Innovation, Rwanda"
+          width={48}
+          height={48}
+          className="h-12 w-12 object-contain"
+        />
         <span className="text-lg font-extrabold tracking-wide text-slate-800">MINICT</span>
       </div>
     ),
@@ -88,35 +91,27 @@ const PARTNERS: Partner[] = [
     name: "RISA",
     description: "Collaboration across Rwanda's digital transformation initiatives.",
     mark: (
-      <div className="flex items-center space-x-2">
-        <div className="relative flex h-8 w-8 items-center justify-center">
-          <span className="absolute inset-0 rounded-full border-2 border-dashed border-blue-600" />
-          <span className="h-2.5 w-2.5 rounded-full bg-blue-600" />
-        </div>
-        <div className="text-left leading-none">
-          <span className="text-xl font-black tracking-tight text-blue-700">
-            R<span className="text-red-500">I</span>SA
-          </span>
-          <span className="mt-0.5 block text-[6.5px] font-semibold uppercase tracking-wider text-slate-500">
-            Rwanda Information Society Authority
-          </span>
-        </div>
-      </div>
+      <Image
+        src="/images/partners/risa.png"
+        alt="Rwanda Information Society Authority"
+        width={160}
+        height={54}
+        className="h-9 w-auto object-contain"
+      />
     ),
   },
   {
     name: "ICT Chamber",
     description: "Industry-level collaboration and community engagement.",
     mark: (
-      <div className="flex flex-col items-center">
-        <div className="flex items-center">
-          <span className="mr-0.5 text-lg leading-none text-amber-500">✶</span>
-          <span className="text-2xl font-bold tracking-tight text-slate-800">ICT</span>
-        </div>
-        <span className="text-[9px] font-medium uppercase tracking-[0.2em] text-slate-500">
-          Chamber
-        </span>
-        <span className="text-[6.5px] text-slate-400">Connect . Grow . Expand</span>
+      <div className="flex h-16 w-40 items-center justify-center rounded-lg bg-slate-900 p-3">
+        <Image
+          src="/images/partners/ict-chamber.png"
+          alt="Rwanda ICT Chamber"
+          width={143}
+          height={117}
+          className="h-full w-auto object-contain"
+        />
       </div>
     ),
   },
@@ -135,25 +130,13 @@ const PARTNERS: Partner[] = [
     name: "Resilient Builders Initiative",
     description: "Innovation and capacity-building collaboration.",
     mark: (
-      <div className="flex flex-col items-center">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-600/30 bg-emerald-50 text-emerald-600">
-          <svg
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z" />
-            <circle cx="12" cy="9" r="3" />
-          </svg>
-        </div>
-        <span className="mt-1.5 text-[8px] font-semibold uppercase tracking-wider text-emerald-950">
-          Resilient Builders
-        </span>
-        <span className="text-[6.5px] uppercase tracking-wider text-slate-500">Initiative</span>
-      </div>
+      <Image
+        src="/images/partners/resilient-builders.svg"
+        alt="Resilient Builders Initiative"
+        width={177}
+        height={40}
+        className="h-9 w-auto object-contain"
+      />
     ),
   },
   {
@@ -195,15 +178,13 @@ const PARTNERS: Partner[] = [
     name: "Rwanda Development Board",
     description: "Collaboration supporting Rwanda's development and innovation ecosystem.",
     mark: (
-      <div className="flex items-center space-x-1.5">
-        <div className="h-6 w-2.5 rounded-sm bg-emerald-500" />
-        <div className="text-left">
-          <span className="text-xl font-black tracking-wider text-slate-800">RDB</span>
-          <span className="-mt-1 block text-[6px] font-semibold uppercase tracking-tighter text-slate-500">
-            Rwanda Development Board
-          </span>
-        </div>
-      </div>
+      <Image
+        src="/images/partners/rdb.jpg"
+        alt="Rwanda Development Board"
+        width={199}
+        height={42}
+        className="h-9 w-auto object-contain"
+      />
     ),
   },
 ];
@@ -213,7 +194,7 @@ export default function IndustriesPartnershipsPage() {
     <>
       <section className="px-6 pb-16 pt-20 text-center md:pb-24 md:pt-28">
         <div className="mx-auto max-w-3xl">
-          <h1 className="mb-5 text-4xl font-bold leading-tight tracking-tight text-slate-950 md:text-5xl">
+          <h1 className="mb-5 font-heading text-4xl font-bold leading-tight tracking-tight text-slate-950 md:text-5xl">
             Industries &amp; Partnerships
           </h1>
           <p className="mx-auto mb-8 max-w-xl text-sm font-normal leading-relaxed text-slate-600 md:text-base">
@@ -230,7 +211,7 @@ export default function IndustriesPartnershipsPage() {
 
       <section className="px-6 py-12 md:py-16">
         <div className="mx-auto max-w-content">
-          <h2 className="mb-14 text-center text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
+          <h2 className="mb-14 text-center font-heading text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
             Industries we serve
           </h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -254,8 +235,8 @@ export default function IndustriesPartnershipsPage() {
                 <h3
                   className={
                     industry.highlight
-                      ? "mb-4 text-xl font-bold tracking-tight text-white"
-                      : "mb-4 text-xl font-bold tracking-tight text-slate-900"
+                      ? "mb-4 font-heading text-xl font-bold tracking-tight text-white"
+                      : "mb-4 font-heading text-xl font-bold tracking-tight text-slate-900"
                   }
                 >
                   {industry.titleLines.map((line, index) => (
@@ -282,7 +263,7 @@ export default function IndustriesPartnershipsPage() {
 
       <section className="border-t border-slate-100/80 px-6 py-20 md:py-24">
         <div className="mx-auto max-w-content">
-          <h2 className="mb-14 text-center text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
+          <h2 className="mb-14 text-center font-heading text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
             Our collaboration ecosystem
           </h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -303,7 +284,7 @@ export default function IndustriesPartnershipsPage() {
 
       <section className="bg-white px-6 py-24 text-center md:py-32">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
             Collaboration activities
           </h2>
         </div>

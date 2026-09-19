@@ -11,7 +11,9 @@ export default function ContactForm() {
   if (submitted) {
     return (
       <div className="rounded-2xl border border-gray-200/90 bg-white p-8 text-center shadow-[0_4px_25px_-4px_rgba(0,0,0,0.04)] sm:p-10">
-        <h2 className="mb-2 text-xl font-bold text-slate-900">Thanks for reaching out</h2>
+        <h2 className="mb-2 font-heading text-xl font-bold text-slate-900">
+          Thanks for reaching out
+        </h2>
         <p className="text-sm text-slate-600">
           We&apos;ve received your details and will be in touch shortly.
         </p>
