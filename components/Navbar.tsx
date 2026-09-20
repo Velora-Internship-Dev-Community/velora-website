@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@/components/Button";
 import Logo from "@/components/Logo";
 
@@ -16,10 +16,26 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 8);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const showSolidBackground = isScrolled || isOpen;
+
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/95 backdrop-blur-sm">
+    <header
+      className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
+        showSolidBackground
+          ? "border-slate-100 bg-white/95 backdrop-blur-sm"
+          : "border-transparent bg-transparent"
+      }`}
+    >
       <div className="mx-auto flex h-20 max-w-content items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2.5" onClick={() => setIsOpen(false)}>
           <Logo className="h-7 w-[23px] text-brand-blue" />

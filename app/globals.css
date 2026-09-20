@@ -10,6 +10,17 @@ body {
   --font-bricolage: "Bricolage Grotesque", sans-serif;
 }
 
+/* Hero tech-badge orbit: a ring rotates continuously; each badge counter-rotates
+   at the same speed so it stays upright while travelling around the circle. */
+@keyframes orbit-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @layer base {
   a:focus-visible,
   button:focus-visible,
@@ -100,5 +111,63 @@ body {
     background: radial-gradient(circle at 85% 50%, #7dd3fc 0%, #ddd6fe 50%, transparent 80%);
     filter: blur(26px);
     opacity: 0.8;
+  }
+
+  /* Deep violet-blue atmospheric visual used for capability/service cards */
+  .capability-gradient {
+    background: radial-gradient(
+      circle at 10% 10%,
+      #8b22e2 0%,
+      #3e1bbb 28%,
+      #1e1e9a 50%,
+      #0c0d3a 85%,
+      #05061c 100%
+    );
+  }
+
+  /* Cyan/purple mesh used for project card banners */
+  .project-gradient {
+    background:
+      radial-gradient(circle at 15% 15%, #00b4d8 0%, transparent 45%),
+      radial-gradient(circle at 85% 25%, #6a00f4 0%, transparent 55%),
+      radial-gradient(circle at 50% 50%, #1a00a0 0%, transparent 65%),
+      radial-gradient(circle at 80% 80%, #7b2cbf 0%, transparent 50%),
+      radial-gradient(circle at 20% 85%, #0077b6 0%, #100060 100%);
+    background-color: #0d084d;
+  }
+
+  /* Featured project card gradients (Home) */
+  .home-gradient-vibrant {
+    background: radial-gradient(
+      circle at 40% 30%,
+      #38bdf8 0%,
+      #366fe5 45%,
+      #7c3aed 80%,
+      #4c1d95 100%
+    );
+  }
+  .home-gradient-indigo {
+    background: radial-gradient(circle at 30% 20%, #818cf8 0%, #4f46e5 50%, #312e81 100%);
+  }
+
+  /* Subtle dot-grid hero background */
+  .dot-grid-bg {
+    background-image: radial-gradient(rgba(148, 163, 184, 0.35) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Faint blueprint grid background used behind the Home services section */
+  .blueprint-grid {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(226, 232, 240, 0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(226, 232, 240, 0.5) 1px, transparent 1px);
+  }
+
+  /* Oversized faint watermark word behind the Home pre-footer CTA */
+  .watermark-text {
+    font-size: clamp(6rem, 18vw, 15rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
   }
 }
