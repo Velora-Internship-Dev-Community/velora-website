@@ -24,6 +24,7 @@ const PARTNER_LOGOS = [
   { name: "MINICT", src: "/images/partners/minict.svg", width: 80, height: 80 },
   { name: "RISA", src: "/images/partners/risa.png", width: 160, height: 54 },
   { name: "Rwanda Development Board", src: "/images/partners/rdb.jpg", width: 199, height: 42 },
+  { name: "ICT Chamber", src: "/images/partners/ict-chamber.png", width: 140, height: 50 },
   {
     name: "Resilient Builders Initiative",
     src: "/images/partners/resilient-builders.svg",
@@ -57,12 +58,9 @@ const LATEST_UPDATES = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-blue-50/50 pb-20 pt-6">
+      <section className="relative overflow-hidden pb-20 pt-6">
         <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background: "radial-gradient(circle at 50% 38%, #dbeafe 0%, #eef5ff 45%, #ffffff 80%)",
-          }}
+          className="absolute inset-0 -z-10 bg-gradient-to-b from-[#c4d9ff] via-[#eef5ff] to-white"
           aria-hidden="true"
         />
         <div className="relative mx-auto flex min-h-[420px] max-w-5xl flex-col items-center justify-center px-6 pb-4 pt-24 text-center lg:min-h-[600px]">
@@ -154,25 +152,34 @@ export default function HomePage() {
             ))}
           </ul>
         </div>
+        {/* Fade to white at the bottom so the orbital lines don't get cut off abruptly */}
+        <div
+          className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-30"
+          aria-hidden="true"
+        />
       </section>
 
-      <section aria-label="Trusted Partners" className="border-b border-slate-100 bg-white py-14">
+      <section aria-label="Trusted Partners" className="py-14">
         <div className="mx-auto max-w-content px-6 sm:px-8">
-          <h2 className="mb-10 font-heading text-base font-bold tracking-tight text-slate-800">
+          <h2 className="mb-8 font-heading text-xl font-bold tracking-tight text-slate-900">
             Trusted by government agencies and industry leaders
           </h2>
-          <div className="rounded-xl border border-slate-100 bg-white/70 p-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.03)]">
-            <div className="grid grid-cols-2 items-center justify-items-center gap-x-8 gap-y-10 opacity-90 sm:grid-cols-4">
-              {PARTNER_LOGOS.map((logo) => (
-                <Image
-                  key={logo.name}
-                  src={logo.src}
-                  alt={logo.name}
-                  width={logo.width}
-                  height={logo.height}
-                  className="h-10 w-auto object-contain"
-                />
-              ))}
+        </div>
+        <div className="border-y border-slate-100/60">
+          <div className="mx-auto max-w-content px-6 sm:px-8">
+            <div className="border-x border-slate-100/60 py-12">
+              <div className="grid grid-cols-2 items-center justify-items-center gap-x-8 gap-y-12 opacity-90 sm:grid-cols-4">
+                {PARTNER_LOGOS.map((logo) => (
+                  <Image
+                    key={logo.name}
+                    src={logo.src}
+                    alt={logo.name}
+                    width={logo.width}
+                    height={logo.height}
+                    className="h-10 w-auto object-contain"
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
