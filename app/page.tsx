@@ -185,35 +185,45 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="blueprint-grid relative bg-slate-50/50 py-24">
+      <section className="blueprint-grid relative py-24">
         <div className="mx-auto max-w-content px-6 sm:px-8">
-          <div className="mx-auto mb-16 max-w-2xl text-center">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-brand-blue sm:text-sm">
-              From first prototype to full deployment
-            </p>
-            <h2 className="font-heading text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-              We build real technology,
-              <br />
-              end to <span className="text-brand-blue">end.</span>
-            </h2>
+          {/* Grey mask behind the heading — hides the grid in that zone */}
+          <div className="relative mx-auto mb-16 max-w-2xl text-center">
+            <div className="absolute -inset-x-12 -inset-y-8 rounded-xl bg-[#f8f8f8]" aria-hidden="true" />
+            <div className="relative">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-brand-blue sm:text-sm">
+                From first prototype to full deployment
+              </p>
+              <h2 className="font-heading text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+                We build real technology,
+                <br />
+                end to <span className="text-brand-blue">end.</span>
+              </h2>
+            </div>
           </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {CAPABILITIES.map((capability) => (
-              <article
-                key={capability.slug}
-                className="flex flex-col items-center rounded-2xl border border-blue-100 bg-gradient-to-b from-blue-50/60 to-white p-8 text-center shadow-sm transition-shadow duration-200 hover:shadow-md"
-              >
-                <h3 className="mb-2 font-heading text-xl font-bold text-slate-900">
-                  {capability.title}
-                </h3>
-                <p className="mb-8 min-h-[40px] text-sm text-slate-600">
-                  {capability.shortDescription}
-                </p>
-                <div className="flex h-48 w-full items-center justify-center">
-                  <div className="h-36 w-44">{capability.icon}</div>
-                </div>
-              </article>
-            ))}
+        </div>
+        {/* Outer grey mask — sits outside the padded container so cards keep their full width */}
+        <div className="mx-auto max-w-[1400px] px-6 sm:px-8">
+          <div className="rounded-2xl bg-[#f8f8f8] p-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {CAPABILITIES.map((capability) => (
+                <article
+                  key={capability.slug}
+                  className="flex flex-col items-center border-[4px] border-white bg-gradient-to-b from-[#ddeaff] to-white p-10 text-center shadow-sm"
+                  style={{ borderRadius: "10px" }}
+                >
+                  <h3 className="mb-2 font-heading font-bold text-[#00287C]" style={{ fontSize: "24px" }}>
+                    {capability.title}
+                  </h3>
+                  <p className="mb-6 min-h-[40px] text-sm text-slate-600">
+                    {capability.shortDescription}
+                  </p>
+                  <div className="flex h-96 w-full items-center justify-center">
+                    <div className="h-full w-full">{capability.icon}</div>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -226,24 +236,67 @@ export default function HomePage() {
             </h2>
             <Button href="/projects">Explore projects</Button>
           </div>
-          <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-12">
-            {FEATURED_PROJECTS.map((project, index) => (
-              <div key={index} className="md:col-span-4">
+
+          <div className="flex items-stretch gap-4">
+
+            {/* Left column: card top-aligned + accent fills remaining space, square */}
+            <div className="flex w-[26%] flex-shrink-0 flex-col justify-between gap-4">
+              <div className="news-gradient-warm relative aspect-square w-full overflow-hidden rounded-xl">
                 <div
-                  className={`${project.gradient} ${project.size} relative flex w-full flex-col justify-end overflow-hidden rounded-2xl p-6 shadow-sm`}
-                >
-                  <div className="absolute inset-0 bg-black/10" aria-hidden="true" />
-                  <p className="relative z-10 text-base font-medium text-white drop-shadow-sm sm:text-lg">
-                    Introducing a new feature
-                  </p>
-                </div>
+                  className="absolute inset-x-0 bottom-0 h-2/3"
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0) 100%)" }}
+                  aria-hidden="true"
+                />
+                <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/10 pointer-events-none" />
+                <p className="absolute bottom-4 left-5 right-5 z-10 text-sm font-medium text-white">
+                  Introducing a new feature
+                </p>
               </div>
-            ))}
+              {/* Accent: square, self-end so it hugs the center card side */}
+              <div className="flex justify-end">
+                <div className="aspect-square w-[70%] rounded-xl bg-[#C4D9FF]" aria-hidden="true" />
+              </div>
+            </div>
+
+            {/* Center column: large dominant card — stretches to match side columns total height */}
+            <div className="flex w-[46%] flex-shrink-0 flex-col self-stretch">
+              <div className="home-gradient-vibrant relative w-full grow overflow-hidden rounded-xl">
+                <div
+                  className="absolute inset-x-0 bottom-0 h-2/3"
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0) 100%)" }}
+                  aria-hidden="true"
+                />
+                <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/10 pointer-events-none" />
+                <p className="absolute bottom-6 left-6 right-6 z-10 text-base font-medium text-white">
+                  Introducing a new feature
+                </p>
+              </div>
+            </div>
+
+            {/* Right column: accent fills remaining space square + card bottom-aligned */}
+            <div className="flex w-[26%] flex-shrink-0 flex-col justify-between gap-4">
+              {/* Accent: square, self-start so it hugs the center card side */}
+              <div className="flex justify-start">
+                <div className="aspect-square w-[70%] rounded-xl bg-[#C4D9FF]" aria-hidden="true" />
+              </div>
+              <div className="home-gradient-dark relative aspect-square w-full overflow-hidden rounded-xl">
+                <div
+                  className="absolute inset-x-0 bottom-0 h-2/3"
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0) 100%)" }}
+                  aria-hidden="true"
+                />
+                <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/10 pointer-events-none" />
+                <p className="absolute bottom-4 left-5 right-5 z-10 text-sm font-medium text-white">
+                  Introducing a new feature
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      <section className="border-t border-slate-100 bg-slate-50 py-20">
+      <section className="border-t border-slate-100 py-20" style={{ background: "linear-gradient(to bottom, #c4d9ff, #ffffff)" }}>
         <div className="mx-auto max-w-content px-6 sm:px-8">
           <div className="mb-10 flex items-center justify-between">
             <h2 className="font-heading text-3xl font-extrabold tracking-tight text-slate-900">
@@ -258,13 +311,12 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {LATEST_UPDATES.map((update) => (
-              <Link
+              <div
                 key={update.slug}
-                href={`/news/${update.slug}`}
-                className="group flex flex-col rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+                className="flex flex-col rounded-2xl border border-slate-200/80 bg-white p-5"
               >
-                <div className={`${update.gradient} mb-5 h-56 w-full rounded-xl`} />
-                <h3 className="mb-3 font-heading text-xl font-bold text-slate-900 transition-colors group-hover:text-brand-blue">
+                <div className={`${update.gradient} mb-5 aspect-square w-full rounded-xl`} />
+                <h3 className="mb-3 font-heading text-xl font-bold text-slate-900">
                   Introducing feature
                 </h3>
                 <div className="mt-auto flex items-center justify-between pt-2 text-xs font-medium text-slate-500 sm:text-sm">
@@ -273,17 +325,20 @@ export default function HomePage() {
                     <span className="text-slate-300">•</span>
                     <span>{update.date}</span>
                   </div>
-                  <span className="text-brand-blue transition-transform group-hover:translate-x-0.5">
-                    →
-                  </span>
+                  <Link
+                    href={`/news/${update.slug}`}
+                    className="flex items-center gap-1 text-brand-blue hover:underline"
+                  >
+                    READ MORE →
+                  </Link>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="relative flex items-center justify-center overflow-hidden bg-white py-28 text-center">
+      <section className="relative flex items-center justify-center overflow-hidden bg-white py-40 text-center">
         <div
           className="watermark-text pointer-events-none absolute inset-0 flex select-none items-center justify-center font-heading font-black text-slate-100"
           aria-hidden="true"
