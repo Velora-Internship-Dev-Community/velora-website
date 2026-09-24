@@ -39,7 +39,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="relative overflow-hidden pb-28 pt-6 lg:pb-20">
+      <section className="relative overflow-hidden pb-16 pt-6 lg:pb-20">
         <div
           className="absolute inset-0 -z-10 bg-gradient-to-b from-[#c4d9ff] via-[#eef5ff] to-white"
           aria-hidden="true"
@@ -89,6 +89,20 @@ export default async function HomePage() {
 
           <OrbitField badges={TECH_BADGES} />
 
+          {/* Below lg there is no room to orbit the badges around the headline, so the
+              same orbit is drawn larger behind the copy, softened so the text stays
+              readable, and clipped by the hero. */}
+          <div
+            className="pointer-events-none absolute left-1/2 top-[62%] z-0 w-[140%] max-w-[760px] -translate-x-1/2 -translate-y-1/2 opacity-60 lg:hidden"
+            aria-hidden="true"
+          >
+            <OrbitStage badges={TECH_BADGES} />
+          </div>
+          <div
+            className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-[88%] w-[105%] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(closest-side,rgba(238,245,255,0.95)_55%,rgba(238,245,255,0))] lg:hidden"
+            aria-hidden="true"
+          />
+
           <div className="relative z-20 max-w-3xl space-y-6">
             <h1 className="font-heading text-[2rem] font-extrabold leading-[1.15] tracking-tight text-slate-900 sm:text-6xl">
               Innovation built for
@@ -111,12 +125,6 @@ export default async function HomePage() {
               </Button>
             </div>
           </div>
-        </div>
-
-        {/* Below lg there is no room to orbit the badges around the headline, so the
-            same orbit is drawn as its own scaled stage under the hero copy. */}
-        <div className="relative z-20 mx-auto mt-12 max-w-4xl px-6 lg:hidden">
-          <OrbitStage badges={TECH_BADGES} />
         </div>
 
         {/* The stage is decorative; screen readers get the technologies as a plain list. */}

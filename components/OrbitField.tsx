@@ -136,9 +136,9 @@ interface StageRingSpec extends RingSpec {
 }
 
 const STAGE_RINGS: StageRingSpec[] = [
-  { radius: 20, durationSeconds: 60, direction: "normal", scale: 1, opacity: 1, weight: 6 },
-  { radius: 32, durationSeconds: 85, direction: "reverse", scale: 0.95, opacity: 0.95, weight: 10 },
-  { radius: 44, durationSeconds: 110, direction: "normal", scale: 0.9, opacity: 0.9, weight: 12 },
+  { radius: 21, durationSeconds: 60, direction: "normal", scale: 1, opacity: 1, weight: 6 },
+  { radius: 33, durationSeconds: 85, direction: "reverse", scale: 0.95, opacity: 0.95, weight: 10 },
+  { radius: 46, durationSeconds: 110, direction: "normal", scale: 0.9, opacity: 0.9, weight: 12 },
 ];
 
 /** Split badges across rings in proportion to their weights, keeping order. */
@@ -170,7 +170,7 @@ export function OrbitStage({ badges }: OrbitFieldProps) {
 
   return (
     <div
-      className="pointer-events-none relative mx-auto aspect-square w-full max-w-[560px] lg:hidden"
+      className="pointer-events-none relative aspect-square w-full lg:hidden"
       style={{ containerType: "inline-size" }}
       aria-hidden="true"
     >
@@ -180,7 +180,7 @@ export function OrbitStage({ badges }: OrbitFieldProps) {
           ring={ring}
           unit="cqw"
           badgeClassName="flex items-center justify-center rounded-full border border-blue-300/55 bg-white"
-          badgeStyle={{ width: "clamp(36px, 9.5cqw, 48px)", height: "clamp(36px, 9.5cqw, 48px)" }}
+          badgeStyle={{ width: "clamp(34px, 8cqw, 46px)", height: "clamp(34px, 8cqw, 46px)" }}
         />
       ))}
 
