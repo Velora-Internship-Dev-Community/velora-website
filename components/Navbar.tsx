@@ -30,7 +30,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
+      className={`fixed w-full top-0 z-50 border-b transition-colors duration-300 ${
         showSolidBackground
           ? "border-slate-100 bg-white/95 backdrop-blur-sm"
           : "border-transparent bg-transparent"
