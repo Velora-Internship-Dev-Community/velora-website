@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
 import Footer from "@/components/Footer";
@@ -223,16 +224,21 @@ export default function ProjectPage({ params }: Props) {
             </Link>
           </div>
           <div className="grid grid-cols-1 gap-x-14 gap-y-8 md:grid-cols-2">
-            {PROJECT.relatedSlugs.map((slug) => (
+            {PROJECT.relatedSlugs.map((slug, i) => (
               <article
                 key={slug}
                 className="flex flex-col border border-[#E1E1E1] bg-white p-5"
                 style={{ borderRadius: "10px" }}
               >
                 <div
-                  className="project-gradient mb-6 aspect-[4/3] w-full"
+                  className="relative mb-6 aspect-[4/3] w-full overflow-hidden"
                   style={{ borderRadius: "8px" }}
-                />
+                >
+                  <Image
+                    src={i === 0 ? "/images/partners/backgrounds/partner-bg-7.jpg" : "/images/partners/backgrounds/partner-bg-8.jpg"}
+                    alt="" fill className="object-cover"
+                  />
+                </div>
                 <h3 className="mb-2 font-heading text-xl font-normal tracking-tight text-slate-900">
                   Smart Garden System
                 </h3>

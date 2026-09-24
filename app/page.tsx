@@ -22,38 +22,20 @@ const LEFT_BADGES = FALLBACK_BADGES.filter((_, i) => i % 2 === 0);
 const RIGHT_BADGES = FALLBACK_BADGES.filter((_, i) => i % 2 === 1);
 
 const PARTNER_LOGOS = [
-  { name: "MINICT", src: "/images/partners/minict.svg", width: 80, height: 80 },
+  { name: "MINICT", src: "/images/partners/minict.png", width: 80, height: 80 },
   { name: "RISA", src: "/images/partners/risa.png", width: 160, height: 54 },
-  { name: "Rwanda Development Board", src: "/images/partners/rdb.jpg", width: 199, height: 42 },
+  { name: "Rwanda Development Board", src: "/images/partners/rdb.png", width: 199, height: 42 },
   { name: "ICT Chamber", src: "/images/partners/ict-chamber.png", width: 140, height: 50 },
-  {
-    name: "Resilient Builders Initiative",
-    src: "/images/partners/resilient-builders.svg",
-    width: 177,
-    height: 40,
-  },
+  { name: "Strettch", src: "/images/partners/strettch.png", width: 100, height: 30 },
+  { name: "Resilient Builders Initiative", src: "/images/partners/resilient-builders.svg", width: 177, height: 40 },
+  { name: "FAO", src: "/images/partners/fao.png", width: 80, height: 80 },
+  { name: "Rwanda Coding Academy", src: "/images/partners/rca.png", width: 140, height: 50 },
 ];
 
-const FEATURED_PROJECTS = [
-  { gradient: "news-gradient-warm", size: "h-72 sm:h-80" },
-  { gradient: "home-gradient-vibrant", size: "h-[390px] sm:h-[430px]" },
-  { gradient: "home-gradient-indigo", size: "h-72 sm:h-80" },
-] as const;
-
 const LATEST_UPDATES = [
-  { slug: "update-1", category: "Product", date: "Mar 11, 2026", gradient: "news-gradient-warm" },
-  {
-    slug: "update-2",
-    category: "Product",
-    date: "Mar 11, 2026",
-    gradient: "news-gradient-pastel",
-  },
-  {
-    slug: "update-3",
-    category: "Product",
-    date: "Mar 11, 2026",
-    gradient: "news-gradient-ethereal",
-  },
+  { slug: "update-1", category: "Product", date: "Mar 11, 2026", image: "/images/industries/industry-4.jpg" },
+  { slug: "update-2", category: "Product", date: "Mar 11, 2026", image: "/images/partners/backgrounds/partner-bg-1.jpg" },
+  { slug: "update-3", category: "Product", date: "Mar 11, 2026", image: "/images/partners/backgrounds/partner-bg-2.jpg" },
 ];
 
 export default function HomePage() {
@@ -86,7 +68,7 @@ export default function HomePage() {
               <span
                 key={tech.label}
                 title={tech.label}
-                className="flex h-14 w-14 items-center justify-center rounded-full bg-white p-1 shadow-[0_4px_14px_-2px_rgba(54,111,229,0.15),0_2px_6px_-1px_rgba(0,0,0,0.05)]"
+                className="flex h-14 w-14 items-center justify-center rounded-full border border-blue-300/55 bg-white p-1"
               >
                 {tech.icon}
               </span>
@@ -100,7 +82,7 @@ export default function HomePage() {
               <span
                 key={tech.label}
                 title={tech.label}
-                className="flex h-14 w-14 items-center justify-center rounded-full bg-white p-1 shadow-[0_4px_14px_-2px_rgba(54,111,229,0.15),0_2px_6px_-1px_rgba(0,0,0,0.05)]"
+                className="flex h-14 w-14 items-center justify-center rounded-full border border-blue-300/55 bg-white p-1"
               >
                 {tech.icon}
               </span>
@@ -146,7 +128,7 @@ export default function HomePage() {
               <li
                 key={tech.label}
                 title={tech.label}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-blue-100 bg-white shadow-sm"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-blue-100 bg-white"
               >
                 {tech.icon}
               </li>
@@ -160,27 +142,26 @@ export default function HomePage() {
         />
       </section>
 
-      <section aria-label="Trusted Partners" className="py-14">
+      <section aria-label="Trusted Partners" className="relative py-14">
+        <div className="absolute inset-x-0 bottom-0 h-px bg-[#D8E1F1]" aria-hidden="true" />
         <div className="mx-auto max-w-content px-6 sm:px-8">
           <h2 className="mb-8 font-heading text-xl font-bold tracking-tight text-slate-900">
             Trusted by government agencies and industry leaders
           </h2>
-        </div>
-        <div className="border-y border-slate-100/60">
-          <div className="mx-auto max-w-content px-6 sm:px-8">
-            <div className="border-x border-slate-100/60 py-12">
-              <div className="grid grid-cols-2 items-center justify-items-center gap-x-8 gap-y-12 opacity-90 sm:grid-cols-4">
-                {PARTNER_LOGOS.map((logo) => (
-                  <Image
-                    key={logo.name}
-                    src={logo.src}
-                    alt={logo.name}
-                    width={logo.width}
-                    height={logo.height}
-                    className="h-10 w-auto object-contain"
-                  />
-                ))}
-              </div>
+          <div className="relative">
+            <div className="absolute -inset-y-4 left-0 w-px bg-[#D8E1F1]" aria-hidden="true" />
+            <div className="absolute -inset-y-4 right-0 w-px bg-[#D8E1F1]" aria-hidden="true" />
+            <div className="grid grid-cols-2 items-center justify-items-center gap-x-10 gap-y-10 px-6 py-12 opacity-90 sm:grid-cols-4 sm:px-8">
+              {PARTNER_LOGOS.map((logo) => (
+                <Image
+                  key={logo.name}
+                  src={logo.src}
+                  alt={logo.name}
+                  width={logo.width}
+                  height={logo.height}
+                  className={`w-auto object-contain ${logo.name === "Rwanda Coding Academy" ? "h-14" : "h-10"}`}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -210,16 +191,27 @@ export default function HomePage() {
               {CAPABILITIES.map((capability) => (
                 <article
                   key={capability.slug}
-                  className="flex flex-col items-center border-[4px] border-white bg-gradient-to-b from-[#ddeaff] to-white p-10 text-center shadow-sm"
+                  className="relative flex flex-col items-center border-[4px] border-white bg-gradient-to-b from-[#ddeaff] to-white p-10 text-center shadow-sm overflow-hidden"
                   style={{ borderRadius: "10px" }}
                 >
-                  <h3 className="mb-2 font-heading font-bold text-[#00287C]" style={{ fontSize: "24px" }}>
+                  {/* Radial dot pattern — visible at center, fades outward */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    aria-hidden="true"
+                    style={{
+                      backgroundImage: "radial-gradient(#93b8f0 1.2px, transparent 1.2px)",
+                      backgroundSize: "22px 22px",
+                      WebkitMaskImage: "radial-gradient(ellipse 60% 60% at 50% 50%, black 0%, transparent 100%)",
+                      maskImage: "radial-gradient(ellipse 60% 60% at 50% 50%, black 0%, transparent 100%)",
+                    }}
+                  />
+                  <h3 className="relative z-10 mb-2 font-heading font-bold text-[#00287C]" style={{ fontSize: "24px" }}>
                     {capability.title}
                   </h3>
-                  <p className="mb-6 min-h-[40px] text-sm text-slate-600">
+                  <p className="relative z-10 mb-6 min-h-[40px] text-sm text-slate-600">
                     {capability.shortDescription}
                   </p>
-                  <div className="flex h-96 w-full items-center justify-center">
+                  <div className="relative z-10 flex h-96 w-full items-center justify-center">
                     <div className="h-full w-full">{capability.icon}</div>
                   </div>
                 </article>
@@ -242,7 +234,8 @@ export default function HomePage() {
 
             {/* Left column: card top-aligned + accent fills remaining space, square */}
             <div className="flex w-[26%] flex-shrink-0 flex-col justify-between gap-4">
-              <div className="news-gradient-warm relative aspect-square w-full overflow-hidden rounded-xl">
+              <div className="relative aspect-square w-full overflow-hidden rounded-xl">
+                <Image src="/images/industries/industry-1.jpg" alt="" fill className="object-cover" />
                 <div
                   className="absolute inset-x-0 bottom-0 h-2/3"
                   style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0) 100%)" }}
@@ -253,7 +246,6 @@ export default function HomePage() {
                   Introducing a new feature
                 </p>
               </div>
-              {/* Accent: square, self-end so it hugs the center card side */}
               <div className="flex justify-end">
                 <div className="aspect-square w-[70%] rounded-xl bg-[#C4D9FF]" aria-hidden="true" />
               </div>
@@ -261,7 +253,8 @@ export default function HomePage() {
 
             {/* Center column: large dominant card — stretches to match side columns total height */}
             <div className="flex w-[46%] flex-shrink-0 flex-col self-stretch">
-              <div className="home-gradient-vibrant relative w-full grow overflow-hidden rounded-xl">
+              <div className="relative w-full grow overflow-hidden rounded-xl">
+                <Image src="/images/industries/industry-2.jpg" alt="" fill className="object-cover" />
                 <div
                   className="absolute inset-x-0 bottom-0 h-2/3"
                   style={{ background: "linear-gradient(to top, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0) 100%)" }}
@@ -276,11 +269,11 @@ export default function HomePage() {
 
             {/* Right column: accent fills remaining space square + card bottom-aligned */}
             <div className="flex w-[26%] flex-shrink-0 flex-col justify-between gap-4">
-              {/* Accent: square, self-start so it hugs the center card side */}
               <div className="flex justify-start">
                 <div className="aspect-square w-[70%] rounded-xl bg-[#C4D9FF]" aria-hidden="true" />
               </div>
-              <div className="home-gradient-dark relative aspect-square w-full overflow-hidden rounded-xl">
+              <div className="relative aspect-square w-full overflow-hidden rounded-xl">
+                <Image src="/images/industries/industry-3.jpg" alt="" fill className="object-cover" />
                 <div
                   className="absolute inset-x-0 bottom-0 h-2/3"
                   style={{ background: "linear-gradient(to top, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0) 100%)" }}
@@ -297,7 +290,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-slate-100 py-20" style={{ background: "linear-gradient(to bottom, #c4d9ff, #ffffff)" }}>
+      <section className="py-20" style={{ background: "linear-gradient(to bottom, #c4d9ff, #ffffff)" }}>
         <div className="mx-auto max-w-content px-6 sm:px-8">
           <div className="mb-10 flex items-center justify-between">
             <h2 className="font-heading text-3xl font-extrabold tracking-tight text-slate-900">
@@ -316,7 +309,9 @@ export default function HomePage() {
                 key={update.slug}
                 className="flex flex-col rounded-2xl border border-slate-200/80 bg-white p-5"
               >
-                <div className={`${update.gradient} mb-5 aspect-square w-full rounded-xl`} />
+                <div className="relative mb-5 aspect-square w-full overflow-hidden rounded-xl">
+                  <Image src={update.image} alt="" fill className="object-cover" />
+                </div>
                 <h3 className="mb-3 font-heading text-xl font-bold text-slate-900">
                   Introducing feature
                 </h3>

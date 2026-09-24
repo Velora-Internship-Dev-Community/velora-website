@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import CtaBand from "@/components/CtaBand";
 import Footer from "@/components/Footer";
 
@@ -9,10 +10,21 @@ export const metadata: Metadata = {
     "7 active technology projects across our core sectors — technology built for real challenges.",
 };
 
+const PROJECT_IMAGES = [
+  "/images/industries/industry-2.jpg",
+  "/images/industries/industry-3.jpg",
+  "/images/industries/industry-4.jpg",
+  "/images/partners/backgrounds/partner-bg-1.jpg",
+  "/images/partners/backgrounds/partner-bg-2.jpg",
+  "/images/partners/backgrounds/partner-bg-5.jpg",
+  "/images/partners/backgrounds/partner-bg-6.jpg",
+];
+
 const PROJECTS = Array.from({ length: 7 }, (_, index) => ({
   slug: `project-${index + 1}`,
   title: "Smart Garden System",
   description: "AI-driven crop monitoring for better yields",
+  image: PROJECT_IMAGES[index],
 }));
 
 const gridBg = {
@@ -48,7 +60,9 @@ export default function ProjectsPage() {
               style={{ borderRadius: "10px" }}
             >
               <div>
-                <div className="project-gradient mb-6 aspect-[4/3] w-full overflow-hidden" style={{ borderRadius: "8px" }} />
+                <div className="relative mb-6 aspect-[4/3] w-full overflow-hidden" style={{ borderRadius: "8px" }}>
+                  <Image src={project.image} alt="" fill className="object-cover" />
+                </div>
                 <h2 className="mb-2 font-heading text-2xl font-normal tracking-tight text-slate-900">
                   {project.title}
                 </h2>
