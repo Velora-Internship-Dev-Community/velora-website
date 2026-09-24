@@ -39,12 +39,12 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="relative overflow-hidden pb-16 pt-6 lg:pb-20">
+      <section className="relative flex min-h-[100svh] flex-col overflow-hidden pb-10 pt-6 lg:block lg:min-h-0 lg:pb-20">
         <div
           className="absolute inset-0 -z-10 bg-gradient-to-b from-[#c4d9ff] via-[#eef5ff] to-white"
           aria-hidden="true"
         />
-        <div className="relative mx-auto flex min-h-[420px] max-w-5xl flex-col items-center justify-center px-6 pb-4 pt-24 text-center lg:min-h-[600px]">
+        <div className="relative mx-auto flex w-full min-h-[420px] flex-1 max-w-5xl flex-col items-center justify-center px-6 pb-4 pt-24 text-center lg:min-h-[600px]">
           <div
             className="pointer-events-none absolute inset-0 z-0 hidden items-center justify-center lg:flex 2xl:hidden"
             aria-hidden="true"
@@ -93,7 +93,7 @@ export default async function HomePage() {
               same orbit is drawn larger behind the copy, softened so the text stays
               readable, and clipped by the hero. */}
           <div
-            className="pointer-events-none absolute left-1/2 top-[62%] z-0 w-[140%] max-w-[760px] -translate-x-1/2 -translate-y-1/2 opacity-60 lg:hidden"
+            className="pointer-events-none absolute left-1/2 top-[54%] z-0 w-[140%] max-w-[760px] -translate-x-1/2 -translate-y-1/2 opacity-60 lg:hidden"
             aria-hidden="true"
           >
             <OrbitStage badges={TECH_BADGES} />
