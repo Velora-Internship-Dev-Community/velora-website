@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
-import OrbitField from "@/components/OrbitField";
+import NewsCard from "@/components/NewsCard";
+import OrbitField, { OrbitStage } from "@/components/OrbitField";
 import Footer from "@/components/Footer";
 import { CAPABILITIES } from "@/lib/capabilities";
+import { getLatestNewsArticles } from "@/lib/data/news";
 import { TECH_BADGES } from "@/lib/techBadges";
 
 export const metadata: Metadata = {
@@ -32,16 +34,12 @@ const PARTNER_LOGOS = [
   { name: "Rwanda Coding Academy", src: "/images/partners/rca.png", width: 140, height: 50 },
 ];
 
-const LATEST_UPDATES = [
-  { slug: "update-1", category: "Product", date: "Mar 11, 2026", image: "/images/industries/industry-4.jpg" },
-  { slug: "update-2", category: "Product", date: "Mar 11, 2026", image: "/images/partners/backgrounds/partner-bg-1.jpg" },
-  { slug: "update-3", category: "Product", date: "Mar 11, 2026", image: "/images/partners/backgrounds/partner-bg-2.jpg" },
-];
+export default async function HomePage() {
+  const latestNews = await getLatestNewsArticles(3);
 
-export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden pb-20 pt-6">
+      <section className="relative overflow-hidden pb-28 pt-6 lg:pb-20">
         <div
           className="absolute inset-0 -z-10 bg-gradient-to-b from-[#c4d9ff] via-[#eef5ff] to-white"
           aria-hidden="true"
@@ -92,7 +90,7 @@ export default function HomePage() {
           <OrbitField badges={TECH_BADGES} />
 
           <div className="relative z-20 max-w-3xl space-y-6">
-            <h1 className="font-heading text-4xl font-extrabold leading-[1.15] tracking-tight text-slate-900 sm:text-6xl">
+            <h1 className="font-heading text-[2rem] font-extrabold leading-[1.15] tracking-tight text-slate-900 sm:text-6xl">
               Innovation built for
               <br />
               real-world <span className="text-brand-blue">problems.</span>
@@ -115,26 +113,18 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Same tech stack, shown as a safe static row below the hero on smaller screens where there's no room to float badges beside the text */}
-        <div className="relative z-20 mx-auto mt-16 max-w-4xl px-6 lg:hidden">
-          <p className="mb-4 text-center text-xs font-semibold uppercase tracking-wide text-slate-500">
-            Our stack
-          </p>
-          <ul
-            className="flex flex-wrap items-center justify-center gap-3"
-            aria-label="Technologies we work with"
-          >
-            {TECH_BADGES.map((tech) => (
-              <li
-                key={tech.label}
-                title={tech.label}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-blue-100 bg-white"
-              >
-                {tech.icon}
-              </li>
-            ))}
-          </ul>
+        {/* Below lg there is no room to orbit the badges around the headline, so the
+            same orbit is drawn as its own scaled stage under the hero copy. */}
+        <div className="relative z-20 mx-auto mt-12 max-w-4xl px-6 lg:hidden">
+          <OrbitStage badges={TECH_BADGES} />
         </div>
+
+        {/* The stage is decorative; screen readers get the technologies as a plain list. */}
+        <ul className="sr-only" aria-label="Technologies we work with">
+          {TECH_BADGES.map((tech) => (
+            <li key={tech.label}>{tech.label}</li>
+          ))}
+        </ul>
         {/* Fade to white at the bottom so the orbital lines don't get cut off abruptly */}
         <div
           className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-30"
@@ -171,7 +161,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-content px-6 sm:px-8">
           {/* Grey mask behind the heading — hides the grid in that zone */}
           <div className="relative mx-auto mb-16 max-w-2xl text-center">
-            <div className="absolute -inset-x-12 -inset-y-8 rounded-xl bg-[#f8f8f8]" aria-hidden="true" />
+            <div className="absolute -inset-x-4 -inset-y-8 rounded-xl bg-[#f8f8f8] sm:-inset-x-12" aria-hidden="true" />
             <div className="relative">
               <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-brand-blue sm:text-sm">
                 From first prototype to full deployment
@@ -230,12 +220,12 @@ export default function HomePage() {
             <Button href="/projects">Explore projects</Button>
           </div>
 
-          <div className="flex items-stretch gap-4">
+          <div className="flex flex-col items-stretch gap-4 md:flex-row">
 
             {/* Left column: card top-aligned + accent fills remaining space, square */}
-            <div className="flex w-[26%] flex-shrink-0 flex-col justify-between gap-4">
+            <div className="flex w-full flex-shrink-0 flex-col justify-between gap-4 md:w-[26%]">
               <div className="relative aspect-square w-full overflow-hidden rounded-xl">
-                <Image src="/images/industries/industry-1.jpg" alt="" fill className="object-cover" />
+                <Image src="/images/industries/industry-1.jpg" alt="" fill sizes="(min-width: 768px) 26vw, 100vw" className="object-cover" />
                 <div
                   className="absolute inset-x-0 bottom-0 h-2/3"
                   style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0) 100%)" }}
@@ -246,15 +236,15 @@ export default function HomePage() {
                   Introducing a new feature
                 </p>
               </div>
-              <div className="flex justify-end">
+              <div className="hidden justify-end md:flex">
                 <div className="aspect-square w-[70%] rounded-xl bg-[#C4D9FF]" aria-hidden="true" />
               </div>
             </div>
 
             {/* Center column: large dominant card — stretches to match side columns total height */}
-            <div className="flex w-[46%] flex-shrink-0 flex-col self-stretch">
-              <div className="relative w-full grow overflow-hidden rounded-xl">
-                <Image src="/images/industries/industry-2.jpg" alt="" fill className="object-cover" />
+            <div className="flex w-full flex-shrink-0 flex-col self-stretch md:w-[46%]">
+              <div className="relative aspect-[4/3] w-full grow overflow-hidden rounded-xl md:aspect-auto">
+                <Image src="/images/industries/industry-2.jpg" alt="" fill sizes="(min-width: 768px) 46vw, 100vw" className="object-cover" />
                 <div
                   className="absolute inset-x-0 bottom-0 h-2/3"
                   style={{ background: "linear-gradient(to top, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0) 100%)" }}
@@ -268,12 +258,12 @@ export default function HomePage() {
             </div>
 
             {/* Right column: accent fills remaining space square + card bottom-aligned */}
-            <div className="flex w-[26%] flex-shrink-0 flex-col justify-between gap-4">
-              <div className="flex justify-start">
+            <div className="flex w-full flex-shrink-0 flex-col justify-between gap-4 md:w-[26%]">
+              <div className="hidden justify-start md:flex">
                 <div className="aspect-square w-[70%] rounded-xl bg-[#C4D9FF]" aria-hidden="true" />
               </div>
               <div className="relative aspect-square w-full overflow-hidden rounded-xl">
-                <Image src="/images/industries/industry-3.jpg" alt="" fill className="object-cover" />
+                <Image src="/images/industries/industry-3.jpg" alt="" fill sizes="(min-width: 768px) 26vw, 100vw" className="object-cover" />
                 <div
                   className="absolute inset-x-0 bottom-0 h-2/3"
                   style={{ background: "linear-gradient(to top, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0) 100%)" }}
@@ -303,32 +293,9 @@ export default function HomePage() {
               All posts
             </Link>
           </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {LATEST_UPDATES.map((update) => (
-              <div
-                key={update.slug}
-                className="flex flex-col rounded-2xl border border-slate-200/80 bg-white p-5"
-              >
-                <div className="relative mb-5 aspect-square w-full overflow-hidden rounded-xl">
-                  <Image src={update.image} alt="" fill className="object-cover" />
-                </div>
-                <h3 className="mb-3 font-heading text-xl font-bold text-slate-900">
-                  Introducing feature
-                </h3>
-                <div className="mt-auto flex items-center justify-between pt-2 text-xs font-medium text-slate-500 sm:text-sm">
-                  <div className="flex items-center gap-3">
-                    <span className="font-semibold text-slate-800">{update.category}</span>
-                    <span className="text-slate-300">•</span>
-                    <span>{update.date}</span>
-                  </div>
-                  <Link
-                    href={`/news/${update.slug}`}
-                    className="flex items-center gap-1 text-brand-blue hover:underline"
-                  >
-                    READ MORE →
-                  </Link>
-                </div>
-              </div>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {latestNews.map((article) => (
+              <NewsCard key={article.id} article={article} />
             ))}
           </div>
         </div>

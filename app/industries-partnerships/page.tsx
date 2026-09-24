@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Image from "next/image";
+import ActivityCard from "@/components/ActivityCard";
 import Button from "@/components/Button";
 import IndustryCard from "@/components/IndustryCard";
 import Footer from "@/components/Footer";
 import PartnerCard from "@/components/PartnerCard";
+import { getCollaborationActivities } from "@/lib/data/activities";
 
 export const metadata: Metadata = {
   title: "Industries & Partnerships — Velora",
@@ -130,7 +132,9 @@ const PARTNERS: Partner[] = [
   },
 ];
 
-export default function IndustriesPartnershipsPage() {
+export default async function IndustriesPartnershipsPage() {
+  const activities = await getCollaborationActivities();
+
   return (
     <>
       <section className="border-b border-slate-100 pb-32 pt-40" style={{ backgroundColor: "#f7f7f9" }}>
@@ -186,11 +190,19 @@ export default function IndustriesPartnershipsPage() {
         </div>
       </section>
 
-      <section className="bg-white px-6 py-24 text-center md:py-32">
-        <div className="mx-auto max-w-4xl">
+      <section className="bg-white px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-4xl text-center">
           <h2 className="font-heading text-3xl font-bold tracking-tight text-slate-950 md:text-5xl">
             Collaboration activities
           </h2>
+          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate-500">
+            Workshops, pilots, and community sessions we run with the partners above.
+          </p>
+        </div>
+        <div className="mx-auto mt-14 grid max-w-content grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {activities.map((activity) => (
+            <ActivityCard key={activity.id} activity={activity} />
+          ))}
         </div>
       </section>
       <Footer />

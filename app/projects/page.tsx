@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import CtaBand from "@/components/CtaBand";
 import Footer from "@/components/Footer";
+import NewsCard from "@/components/NewsCard";
+import { getLatestNewsArticles } from "@/lib/data/news";
 
 export const metadata: Metadata = {
   title: "Projects — Velora",
@@ -34,7 +36,9 @@ const gridBg = {
   backgroundSize: "72px 72px",
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const latestNews = await getLatestNewsArticles(2);
+
   return (
     <div style={gridBg} className="min-h-screen">
       <section className="border-b border-[#E1E1E1] pb-32 pt-40">
@@ -61,7 +65,13 @@ export default function ProjectsPage() {
             >
               <div>
                 <div className="relative mb-6 aspect-[4/3] w-full overflow-hidden" style={{ borderRadius: "8px" }}>
-                  <Image src={project.image} alt="" fill className="object-cover" />
+                  <Image
+                    src={project.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1152px) 528px, (min-width: 768px) 45vw, 100vw"
+                    className="object-cover"
+                  />
                 </div>
                 <h2 className="mb-2 font-heading text-2xl font-normal tracking-tight text-slate-900">
                   {project.title}
@@ -80,6 +90,30 @@ export default function ProjectsPage() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      {/* Projects continue into News & Updates: same cards, same grid. */}
+      <section className="border-t border-[#E1E1E1] pb-20 pt-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+            <div className="max-w-xl">
+              <h2 className="mb-3 font-heading text-3xl font-normal tracking-tight text-slate-900 sm:text-4xl">
+                News &amp; Updates
+              </h2>
+              <p className="text-base leading-relaxed text-slate-500">
+                Field notes, engineering write-ups, and announcements from behind the work.
+              </p>
+            </div>
+            <Link href="/news" className="text-sm font-medium text-brand-blue hover:underline">
+              All news →
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-14 md:gap-y-12">
+            {latestNews.map((article) => (
+              <NewsCard key={article.id} article={article} />
+            ))}
+          </div>
         </div>
       </section>
 

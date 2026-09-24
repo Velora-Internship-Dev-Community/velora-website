@@ -15,18 +15,36 @@ interface BaseProps {
 
 interface LinkButtonProps extends BaseProps {
   href: string;
+  /** Opens in a new tab; use for links that leave the site. */
+  external?: boolean;
   type?: never;
 }
 
 interface SubmitButtonProps extends BaseProps {
   href?: never;
+  external?: never;
   type: "button" | "submit";
 }
 
 type ButtonProps = LinkButtonProps | SubmitButtonProps;
 
-export default function Button({ children, href, type, size = "sm", className = "" }: ButtonProps) {
+export default function Button({
+  children,
+  href,
+  external,
+  type,
+  size = "sm",
+  className = "",
+}: ButtonProps) {
   const classes = `inline-flex items-center justify-center gap-1.5 rounded-lg font-heading font-semibold text-white shadow-sm transition-all hover:bg-brand-dark bg-brand-blue ${SIZE_STYLES[size]} ${className}`;
+
+  if (href && external) {
+    return (
+      <a href={href} className={classes} target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    );
+  }
 
   if (href) {
     return (

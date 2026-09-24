@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
 import Footer from "@/components/Footer";
 
@@ -53,7 +52,7 @@ const gridBg = {
   backgroundSize: "72px 72px",
 };
 
-export default function ProjectPage({ params }: Props) {
+export default function ProjectPage() {
   return (
     <>
       {/* ── 1. HERO ─────────────────────────────────────────────── */}
