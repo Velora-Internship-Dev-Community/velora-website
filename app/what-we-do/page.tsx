@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
 import Footer from "@/components/Footer";
 import { CAPABILITIES } from "@/lib/capabilities";
+
+const CAPABILITY_IMAGES = [
+  "/images/industries/industry-1.jpg",
+  "/images/industries/industry-2.jpg",
+  "/images/industries/industry-3.jpg",
+  "/images/industries/industry-4.jpg",
+  "/images/partners/backgrounds/partner-bg-1.jpg",
+  "/images/partners/backgrounds/partner-bg-2.jpg",
+];
 
 export const metadata: Metadata = {
   title: "What We Do — Velora",
@@ -37,6 +47,7 @@ export default function WhatWeDoPage() {
           <div className="space-y-0">
             {CAPABILITIES.map((capability, index) => {
               const squareRight = index % 2 === 0;
+              const imgSrc = CAPABILITY_IMAGES[index % CAPABILITY_IMAGES.length];
               return (
                 <article
                   key={capability.slug}
@@ -67,16 +78,18 @@ export default function WhatWeDoPage() {
                     </div>
                     <div className="flex-[3]" />
                   </div>
-                  {/* Square gradient */}
+                  {/* Real image */}
                   <div
                     className={`flex items-center ${
                       squareRight ? "justify-end md:order-2" : "justify-start md:order-1"
                     }`}
                   >
                     <div
-                      className="capability-gradient aspect-square w-full"
+                      className="relative aspect-square w-full overflow-hidden"
                       style={{ borderRadius: "10px" }}
-                    />
+                    >
+                      <Image src={imgSrc} alt="" fill className="object-cover" />
+                    </div>
                   </div>
                 </article>
               );

@@ -35,6 +35,7 @@ export default function OrbitField({ badges }: OrbitFieldProps) {
     <div
       className="pointer-events-none absolute inset-0 z-0 hidden 2xl:block"
       aria-hidden="true"
+      style={{ left: "-8px" }}
     >
       {rings.map((ring) => {
         const counterDirection = ring.direction === "normal" ? "reverse" : "normal";
@@ -92,7 +93,7 @@ export default function OrbitField({ badges }: OrbitFieldProps) {
                       >
                         <span
                           title={badge.label}
-                          className="flex h-14 w-14 items-center justify-center rounded-full bg-white p-1 shadow-[0_4px_14px_-2px_rgba(54,111,229,0.15),0_2px_6px_-1px_rgba(0,0,0,0.05)]"
+                          className="flex h-14 w-14 items-center justify-center rounded-full border border-blue-300/55 bg-white p-1"
                         >
                           {badge.icon}
                         </span>

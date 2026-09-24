@@ -76,7 +76,7 @@ const PARTNERS: Partner[] = [
     name: "MINICT",
     description: "Engagement within Rwanda's national ICT and Innovation ecosystem.",
     mark: (
-      <Image src="/images/partners/minict.svg" alt="Ministry of ICT and Innovation, Rwanda" width={80} height={80} className="h-16 w-auto object-contain" />
+      <Image src="/images/partners/minict.png" alt="Ministry of ICT and Innovation, Rwanda" width={80} height={80} className="h-16 w-auto object-contain" />
     ),
   },
   {

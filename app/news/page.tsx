@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -7,15 +8,13 @@ export const metadata: Metadata = {
   description: "Announcements, milestones, and activity from across Velora's technology work.",
 };
 
-const GRADIENTS = ["news-gradient-warm", "news-gradient-pastel", "news-gradient-ethereal"] as const;
-
 const ARTICLES = [
-  { slug: "update-1", category: "Product", date: "Mar 11, 2026" },
-  { slug: "update-2", category: "Product", date: "Mar 11, 2026" },
-  { slug: "update-3", category: "Product", date: "Mar 11, 2026" },
-  { slug: "update-4", category: "Product", date: "Mar 11, 2026" },
-  { slug: "update-5", category: "Product", date: "Mar 11, 2026" },
-  { slug: "update-6", category: "Product", date: "Mar 11, 2026" },
+  { slug: "update-1", category: "Product", date: "Mar 11, 2026", image: "/images/partners/backgrounds/partner-bg-4.jpg" },
+  { slug: "update-2", category: "Product", date: "Mar 11, 2026", image: "/images/partners/backgrounds/partner-bg-5.jpg" },
+  { slug: "update-3", category: "Product", date: "Mar 11, 2026", image: "/images/partners/backgrounds/partner-bg-6.jpg" },
+  { slug: "update-4", category: "Product", date: "Mar 11, 2026", image: "/images/partners/backgrounds/partner-bg-7.jpg" },
+  { slug: "update-5", category: "Product", date: "Mar 11, 2026", image: "/images/partners/backgrounds/partner-bg-8.jpg" },
+  { slug: "update-6", category: "Product", date: "Mar 11, 2026", image: "/images/industries/industry-1.jpg" },
 ];
 
 const gridBg = {
@@ -73,9 +72,11 @@ export default function NewsPage() {
             </div>
             <div className="flex items-center justify-center p-3 sm:p-4 md:w-5/12">
               <div
-                className="news-gradient-featured h-56 min-h-[220px] w-full md:h-full"
+                className="relative h-56 min-h-[220px] w-full overflow-hidden md:h-full"
                 style={{ borderRadius: "8px" }}
-              />
+              >
+                <Image src="/images/partners/backgrounds/partner-bg-3.jpg" alt="" fill className="object-cover" />
+              </div>
             </div>
           </article>
         </div>
@@ -87,12 +88,14 @@ export default function NewsPage() {
             All news
           </h2>
           <div className="grid grid-cols-1 gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-y-16">
-            {ARTICLES.map((article, index) => (
+            {ARTICLES.map((article) => (
               <div key={article.slug} className="flex flex-col">
                 <div
-                  className={`mb-5 aspect-square w-full border border-slate-200/80 ${GRADIENTS[index % GRADIENTS.length]}`}
+                  className="relative mb-5 aspect-square w-full overflow-hidden border border-slate-200/80"
                   style={{ borderRadius: "10px" }}
-                />
+                >
+                  <Image src={article.image} alt="" fill className="object-cover" />
+                </div>
                 <h3 className="mb-2 font-heading text-lg font-normal text-slate-900">
                   Introducing feature
                 </h3>
