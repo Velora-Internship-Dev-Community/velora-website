@@ -3,119 +3,159 @@
 import { useState } from "react";
 
 const inputStyles =
-  "h-12 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm text-slate-900 outline-none transition focus:border-brand-blue focus:ring-1 focus:ring-brand-blue";
+  "h-12 w-full border border-slate-200 bg-white px-4 text-sm text-slate-900 outline-none transition focus:border-brand-blue focus:ring-1 focus:ring-brand-blue";
+
+const labelStyles = "mb-2 block text-sm font-normal text-slate-700";
+
+type FormState = "idle" | "submitting" | "success" | "error";
 
 export default function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const [formState, setFormState] = useState<FormState>("idle");
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  if (submitted) {
+  function validate(data: FormData): Record<string, string> {
+    const errs: Record<string, string> = {};
+    if (!data.get("name")) errs.name = "Name is required.";
+    const email = data.get("email") as string;
+    if (!email) {
+      errs.email = "Email is required.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errs.email = "Enter a valid email address.";
+    }
+    if (!data.get("purpose")) errs.purpose = "Please select an option.";
+    const message = data.get("message") as string;
+    if (!message) {
+      errs.message = "Message is required.";
+    } else if (message.length > 2000) {
+      errs.message = "Message must be under 2000 characters.";
+    }
+    return errs;
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const errs = validate(data);
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      return;
+    }
+    setErrors({});
+    setFormState("submitting");
+
+    // TODO: connect to email/CRM endpoint once backend is decided
+    // e.g. await fetch("/api/contact", { method: "POST", body: data });
+    await new Promise((r) => setTimeout(r, 600)); // stub delay
+    setFormState("success");
+  }
+
+  if (formState === "success") {
     return (
-      <div className="rounded-2xl border border-gray-200/90 bg-white p-8 text-center shadow-[0_4px_25px_-4px_rgba(0,0,0,0.04)] sm:p-10">
-        <h2 className="mb-2 font-heading text-xl font-bold text-slate-900">
-          Thanks for reaching out
-        </h2>
-        <p className="text-sm text-slate-600">
-          We&apos;ve received your details and will be in touch shortly.
+      <div className="flex flex-col items-start justify-center rounded-xl border border-slate-200 bg-white p-10" style={{ borderRadius: "10px" }}>
+        <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-brand-blue">
+          Message sent
+        </p>
+        <h3 className="font-heading text-2xl font-normal text-slate-900">
+          Thanks — we&apos;ll be in touch soon.
+        </h3>
+        <p className="mt-3 text-sm text-slate-500">
+          We typically respond within 1–2 business days.
         </p>
       </div>
     );
   }
 
   return (
-    <div className="rounded-2xl border border-gray-200/90 bg-white p-8 shadow-[0_4px_25px_-4px_rgba(0,0,0,0.04)] sm:p-10">
-      <form
-        className="space-y-6"
-        onSubmit={(event) => {
-          event.preventDefault();
-          setSubmitted(true);
-        }}
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      className="space-y-6"
+    >
+      {/* Name */}
+      <div>
+        <label htmlFor="name" className={labelStyles}>
+          Name <span className="text-brand-blue">*</span>
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          autoComplete="name"
+          className={inputStyles}
+          style={{ borderRadius: "6px" }}
+        />
+        {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
+      </div>
+
+      {/* Email */}
+      <div>
+        <label htmlFor="email" className={labelStyles}>
+          Email <span className="text-brand-blue">*</span>
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          autoComplete="email"
+          className={inputStyles}
+          style={{ borderRadius: "6px" }}
+        />
+        {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
+      </div>
+
+      {/* Organisation / Purpose */}
+      <div>
+        <label htmlFor="purpose" className={labelStyles}>
+          Organisation / Purpose <span className="text-brand-blue">*</span>
+        </label>
+        <select
+          id="purpose"
+          name="purpose"
+          required
+          defaultValue=""
+          className={`${inputStyles} form-select appearance-none text-slate-700`}
+          style={{ borderRadius: "6px" }}
+        >
+          <option value="" disabled hidden>Select one…</option>
+          <option value="client">Client</option>
+          <option value="partner">Partner</option>
+          <option value="investor">Investor</option>
+          <option value="government">Government</option>
+          <option value="researcher">Researcher</option>
+          <option value="job-seeker">Job Seeker</option>
+          <option value="other">Other</option>
+        </select>
+        {errors.purpose && <p className="mt-1 text-xs text-red-500">{errors.purpose}</p>}
+      </div>
+
+      {/* Message */}
+      <div>
+        <label htmlFor="message" className={labelStyles}>
+          Message <span className="text-brand-blue">*</span>
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows={6}
+          maxLength={2000}
+          className={`${inputStyles} h-auto resize-none py-3`}
+          style={{ borderRadius: "6px" }}
+        />
+        {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message}</p>}
+      </div>
+
+      {/* Submit */}
+      <button
+        type="submit"
+        disabled={formState === "submitting"}
+        className="flex h-12 w-full items-center justify-center rounded-lg bg-brand-blue text-sm font-semibold text-white transition-colors hover:bg-brand-dark disabled:opacity-60"
+        style={{ borderRadius: "6px" }}
       >
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <div>
-            <label htmlFor="first-name" className="mb-2 block text-sm font-medium text-slate-800">
-              First name*
-            </label>
-            <input id="first-name" name="first-name" type="text" required className={inputStyles} />
-          </div>
-          <div>
-            <label htmlFor="last-name" className="mb-2 block text-sm font-medium text-slate-800">
-              Last name *
-            </label>
-            <input id="last-name" name="last-name" type="text" required className={inputStyles} />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <div>
-            <label
-              htmlFor="service-needed"
-              className="mb-2 block text-sm font-medium text-slate-800"
-            >
-              Service needed*
-            </label>
-            <select
-              id="service-needed"
-              name="service-needed"
-              required
-              defaultValue=""
-              className={`${inputStyles} form-select appearance-none text-slate-700`}
-            >
-              <option value="" disabled hidden />
-              <option value="artificial-intelligence">Artificial Intelligence</option>
-              <option value="digital-transformation">Digital Transformation</option>
-              <option value="data-analytics">Data &amp; Analytics</option>
-              <option value="automation">Automation</option>
-              <option value="custom-development">Custom Software Development</option>
-            </select>
-          </div>
-          <div>
-            <label
-              htmlFor="estimated-budget"
-              className="mb-2 block text-sm font-medium text-slate-800"
-            >
-              Estimated budget *
-            </label>
-            <select
-              id="estimated-budget"
-              name="estimated-budget"
-              required
-              defaultValue=""
-              className={`${inputStyles} form-select appearance-none text-slate-700`}
-            >
-              <option value="" disabled hidden />
-              <option value="10k-25k">$10,000 – $25,000</option>
-              <option value="25k-50k">$25,000 – $50,000</option>
-              <option value="50k-100k">$50,000 – $100,000</option>
-              <option value="100k+">$100,000+</option>
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="phone-number" className="mb-2 block text-sm font-medium text-slate-800">
-            Phone number *
-          </label>
-          <input
-            id="phone-number"
-            name="phone-number"
-            type="tel"
-            required
-            className={inputStyles}
-          />
-        </div>
-
-        <div className="pt-2">
-          <button
-            type="submit"
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-brand-blue text-base font-medium text-white shadow-sm transition-all duration-150 hover:bg-brand-dark"
-          >
-            <span>Next</span>
-            <span className="text-lg" aria-hidden="true">
-              →
-            </span>
-          </button>
-        </div>
-      </form>
-    </div>
+        {formState === "submitting" ? "Sending…" : "Send Message"}
+      </button>
+    </form>
   );
 }

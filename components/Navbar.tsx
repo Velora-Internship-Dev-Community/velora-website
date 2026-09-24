@@ -7,6 +7,7 @@ import Button from "@/components/Button";
 import Logo from "@/components/Logo";
 
 const NAV_LINKS = [
+  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/what-we-do", label: "What we do" },
   { href: "/projects", label: "Projects" },

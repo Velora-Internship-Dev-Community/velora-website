@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
 import OrbitField from "@/components/OrbitField";
+import Footer from "@/components/Footer";
 import { CAPABILITIES } from "@/lib/capabilities";
 import { TECH_BADGES } from "@/lib/techBadges";
 
@@ -360,6 +361,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

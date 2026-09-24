@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "About — Velora",
@@ -203,6 +204,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

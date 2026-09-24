@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
+import Footer from "@/components/Footer";
 
 interface Props {
   params: { slug: string };
@@ -252,6 +253,7 @@ export default function ProjectPage({ params }: Props) {
 
       {/* ── 8. CTA + FOOTER ─────────────────────────────────────── */}
       <CtaBand />
+      <Footer />
     </>
   );
 }
