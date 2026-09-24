@@ -33,7 +33,7 @@ export default function OrbitField({ badges }: OrbitFieldProps) {
 
   return (
     <div
-      className="pointer-events-none absolute inset-0 z-0 hidden items-center justify-center 2xl:flex"
+      className="pointer-events-none absolute inset-0 z-0 hidden 2xl:block"
       aria-hidden="true"
     >
       {rings.map((ring) => {
@@ -41,7 +41,17 @@ export default function OrbitField({ badges }: OrbitFieldProps) {
         const diameter = ring.radius * 2;
 
         return (
-          <div key={ring.radius} className="absolute" style={{ width: diameter, height: diameter }}>
+          <div
+            key={ring.radius}
+            className="absolute"
+            style={{
+              width: diameter,
+              height: diameter,
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
             {/* Static, subtle orbit path */}
             <div className="absolute inset-0 rounded-full border border-blue-300/55" />
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
+import Footer from "@/components/Footer";
 import { CAPABILITIES } from "@/lib/capabilities";
 
 export const metadata: Metadata = {
@@ -85,6 +86,7 @@ export default function WhatWeDoPage() {
       </section>
 
       <CtaBand />
+      <Footer />
     </>
   );
 }

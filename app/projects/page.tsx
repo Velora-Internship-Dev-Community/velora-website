@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Projects — Velora",
@@ -69,6 +70,7 @@ export default function ProjectsPage() {
       </section>
 
       <CtaBand />
+      <Footer />
     </div>
   );
 }

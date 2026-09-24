@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Button from "@/components/Button";
 import IndustryCard from "@/components/IndustryCard";
+import Footer from "@/components/Footer";
 import PartnerCard from "@/components/PartnerCard";
 
 export const metadata: Metadata = {
@@ -192,6 +193,7 @@ export default function IndustriesPartnershipsPage() {
           </h2>
         </div>
       </section>
+      <Footer />
     </>
   );
 }
