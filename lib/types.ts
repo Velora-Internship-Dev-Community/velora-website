@@ -56,3 +56,28 @@ export interface CoreValue {
   /** Gradient artwork drawn from the same set used by the Projects section. */
   image: string;
 }
+
+export interface ProjectStat {
+  value: string;
+  label: string;
+}
+
+export interface Project {
+  id: string;
+  slug: string;
+  name: string;
+  /** One-line description shown on the project card. */
+  summary: string;
+  /** Headline result shown as the project page title. */
+  outcome: string;
+  /** Filter categories; a project can belong to several. */
+  sectors: string[];
+  image: string;
+  challenge: string[];
+  approach: string[];
+  stats: ProjectStat[];
+  quote?: { text: string; author: string };
+  stack: string[];
+  timeline: string;
+  status: string;
+}

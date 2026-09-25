@@ -1,33 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import CtaBand from "@/components/CtaBand";
 import Footer from "@/components/Footer";
 import NewsCard from "@/components/NewsCard";
+import ProjectsGrid from "@/components/ProjectsGrid";
 import { getLatestNewsArticles } from "@/lib/data/news";
+import { getProjects } from "@/lib/data/projects";
 
 export const metadata: Metadata = {
   title: "Projects — Velora",
   description:
     "7 active technology projects across our core sectors — technology built for real challenges.",
 };
-
-const PROJECT_IMAGES = [
-  "/images/industries/industry-2.jpg",
-  "/images/industries/industry-3.jpg",
-  "/images/industries/industry-4.jpg",
-  "/images/partners/backgrounds/partner-bg-1.jpg",
-  "/images/partners/backgrounds/partner-bg-2.jpg",
-  "/images/partners/backgrounds/partner-bg-5.jpg",
-  "/images/partners/backgrounds/partner-bg-6.jpg",
-];
-
-const PROJECTS = Array.from({ length: 7 }, (_, index) => ({
-  slug: `project-${index + 1}`,
-  title: "Smart Garden System",
-  description: "AI-driven crop monitoring for better yields",
-  image: PROJECT_IMAGES[index],
-}));
 
 const gridBg = {
   backgroundColor: "#f7f7f9",
@@ -37,7 +21,7 @@ const gridBg = {
 };
 
 export default async function ProjectsPage() {
-  const latestNews = await getLatestNewsArticles(2);
+  const [projects, latestNews] = await Promise.all([getProjects(), getLatestNewsArticles(2)]);
 
   return (
     <div style={gridBg} className="min-h-screen">
@@ -48,49 +32,15 @@ export default async function ProjectsPage() {
               Projects
             </h1>
             <p className="text-base font-normal leading-relaxed text-slate-500 sm:text-lg">
-              7 active technology projects across our core sectors — technology built for real
-              challenges.
+              {projects.length} active technology projects across our core sectors — technology
+              built for real challenges.
             </p>
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-20">
-        <div className="grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-14 md:gap-y-12">
-          {PROJECTS.map((project) => (
-            <article
-              key={project.slug}
-              className="flex flex-col justify-between border border-[#E1E1E1] bg-white p-5"
-              style={{ borderRadius: "10px" }}
-            >
-              <div>
-                <div className="relative mb-6 aspect-[4/3] w-full overflow-hidden" style={{ borderRadius: "8px" }}>
-                  <Image
-                    src={project.image}
-                    alt=""
-                    fill
-                    sizes="(min-width: 1152px) 528px, (min-width: 768px) 45vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-                <h2 className="mb-2 font-heading text-2xl font-normal tracking-tight text-slate-900">
-                  {project.title}
-                </h2>
-                <p className="text-sm leading-normal text-slate-500 md:text-base">
-                  {project.description}
-                </p>
-              </div>
-              <div className="mt-6 pt-2">
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="inline-flex items-center text-sm font-medium text-brand-blue hover:underline"
-                >
-                  View project →
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+        <ProjectsGrid projects={projects} />
       </section>
 
       {/* Projects continue into News & Updates: same cards, same grid. */}
